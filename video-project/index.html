@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>FIRMA Calamuchita — Test Property</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      body { margin: 0; background: #1a1a2e; color: #FFF; font-family: 'Inter', system-ui, sans-serif; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      .scene-image { position: absolute; inset: 0; background-size: cover; background-position: center; }
+      .scene-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.3) 100%); }
+      .brand-bar { position: absolute; top: 60px; left: 60px; right: 60px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
+      .brand-logo { font-family: 'Georgia', serif; font-size: 42px; font-weight: bold; letter-spacing: 0.15em; color: #CEB88A; }
+      .brand-tag { font-size: 16px; color: rgba(255,255,255,0.8); letter-spacing: 0.1em; }
+      .info-card { position: absolute; bottom: 120px; left: 60px; right: 60px; z-index: 10; }
+      .info-type { display: inline-block; background: rgba(206,184,138,0.2); border: 1px solid rgba(206,184,138,0.4); color: #CEB88A; font-size: 18px; font-weight: 600; letter-spacing: 0.15em; padding: 8px 20px; margin-bottom: 16px; }
+      .info-title { font-family: 'Georgia', serif; font-size: 48px; line-height: 1.15; margin: 0 0 12px 0; color: #FFFFFF; }
+      .info-location { font-size: 22px; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+      .info-price { font-family: 'Georgia', serif; font-size: 52px; color: #CEB88A; margin: 0; }
+      .closing { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #272F51; }
+      .closing-logo { font-family: 'Georgia', serif; font-size: 80px; font-weight: bold; letter-spacing: 0.2em; color: #CEB88A; margin-bottom: 24px; }
+      .closing-line { width: 120px; height: 2px; background: #CEB88A; margin-bottom: 24px; }
+      .closing-text { font-size: 24px; color: rgba(255,255,255,0.6); letter-spacing: 0.2em; }
+      .closing-contact { margin-top: 40px; font-size: 20px; color: rgba(255,255,255,0.7); }
+      .scene-counter { position: absolute; top: 60px; right: 60px; font-size: 18px; color: rgba(255,255,255,0.7); z-index: 10; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-ile2" id="root" data-composition-id="firma-property" data-start="0" data-width="1080" data-height="1920" data-duration="0">
+      
+      <section data-hf-id="hf-k3cy" id="scene-1" class="clip" data-start="-3" data-duration="3" data-track-index="1">
+        <div data-hf-id="hf-zt4l" class="closing">
+          <div data-hf-id="hf-8sx6" class="closing-logo">FIRMA</div>
+          <div data-hf-id="hf-hck4" class="closing-line"></div>
+          <div data-hf-id="hf-gbh7" class="closing-text">CALAMUCHITA</div>
+          <div data-hf-id="hf-zqz4" class="closing-contact">firmacalamuchita@gmail.com</div>
+        </div>
+      </section>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      
+      tl.from("#scene-1 .closing-logo", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, -2.8);
+      tl.from("#scene-1 .closing-line", { scaleX: 0, opacity: 0, duration: 0.6, ease: "power3.out" }, -2.4);
+      tl.from("#scene-1 .closing-text", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, -2.1);
+      window.__timelines["firma-property"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+[
+  {
+    "propertyId": 456,
+    "visible": true,
+    "featured": false,
+    "editorialStatus": "sold",
+    "sortOrder": 0,
+    "internalNote": "",
+    "updatedAt": "2026-08-28T16:56:04.097Z"
+  },
+  {
+    "propertyId": 601,
+    "visible": true,
+    "featured": false,
+    "editorialStatus": "available",
+    "sortOrder": 10,
+    "internalNote": "",
+    "updatedAt": "2026-08-28T16:56:04.245Z"
+  },
+  {
+    "propertyId": 602,
+    "visible": true,
+    "featured": false,
+    "editorialStatus": "available",
+    "sortOrder": 20,
+    "internalNote": "",
+    "updatedAt": "2026-08-28T16:56:04.551Z"
+  },
+  {
+    "propertyId": 701,
+    "visible": true,
+    "featured": false,
+    "editorialStatus": "available",
+    "sortOrder": 0,
+    "internalNote": "Important note for admin",
+    "updatedAt": "2026-08-28T16:56:04.808Z"
+  },
+  {
+    "propertyId": 702,
+    "visible": true,
+    "featured": false,
+    "editorialStatus": "available",
+    "sortOrder": 0,
+    "internalNote": "Updated note",
+    "updatedAt": "2026-08-28T16:56:04.912Z"
+  }
+]

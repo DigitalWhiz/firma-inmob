@@ -1,0 +1,14 @@
+{
+  "version": "0.8.4",
+  "name": "firma-property",
+  "compositions": [
+    {
+      "id": "firma-property",
+      "file": "index.html",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "duration": 0
+    }
+  ]
+}

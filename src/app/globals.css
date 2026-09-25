@@ -1,0 +1,532 @@
+@import "tailwindcss";
+
+/* ============================================================
+   FIRMA CALAMUCHITA — DESIGN TOKENS
+   ============================================================
+   Premium real estate design system.
+   Single source of truth for all visual decisions.
+   Tokens live in @theme so Tailwind v4 utilities (text-*, font-*,
+   color-*, leading-*, tracking-*) resolve from the same source.
+   ============================================================ */
+
+@theme {
+  /* ============================================================
+     BRAND COLORS
+     ============================================================ */
+
+  --color-brand-gold: #CEB88A;
+  --color-brand-gold-light: #DFD0AA;
+  --color-brand-gold-dark: #B8A276;
+
+  --color-brand-navy: #272F51;
+  --color-brand-navy-light: #3A4468;
+  --color-brand-navy-dark: #1A2140;
+
+  --color-brand-blue: #18286E;
+  --color-brand-blue-light: #2A3D8A;
+  --color-brand-blue-dark: #0F1A52;
+
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* ============================================================
+     SEMANTIC COLORS — LIGHT MODE (default)
+     ============================================================ */
+
+  --color-background: var(--color-white);
+  --color-surface: #F8F7F5;
+  --color-surface-elevated: var(--color-white);
+  --color-surface-hover: #F2F0EC;
+
+  --color-text-primary: var(--color-brand-navy);
+  --color-text-secondary: #5A6078;
+  --color-text-muted: #6B7189;
+  --color-text-inverse: var(--color-white);
+
+  --color-border: #E5E3DF;
+  --color-border-strong: #D0CDC8;
+
+  --color-accent: var(--color-brand-gold);
+  --color-accent-hover: var(--color-brand-gold-dark);
+
+  --color-overlay: rgba(23, 15, 51, 0.6);
+  --color-overlay-light: rgba(23, 15, 51, 0.3);
+  --color-overlay-heavy: rgba(23, 15, 51, 0.85);
+
+  /* ============================================================
+     STATUS COLORS (WCAG AA on light backgrounds)
+     ============================================================ */
+
+  --color-status-available: #15803D;
+  --color-status-available-tint: rgba(21, 128, 61, 0.1);
+  --color-status-reserved: #B45309;
+  --color-status-reserved-tint: rgba(180, 83, 9, 0.1);
+  --color-status-sold: #64748B;
+  --color-status-sold-tint: rgba(100, 116, 139, 0.1);
+  --color-status-featured: #CEB88A;
+  --color-status-featured-tint: rgba(206, 184, 138, 0.15);
+  --color-status-featured-border: rgba(206, 184, 138, 0.3);
+
+  /* ============================================================
+     TYPOGRAPHY
+     ============================================================ */
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  /* --font-inter is injected on <html> by next/font (layout.tsx) —
+     it is the single source of truth for the sans-serif stack. */
+  --font-body: var(--font-inter, "Inter"), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-inter, "Inter"), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Type scale — Desktop */
+  --font-size-display-xl: 4.5rem;
+  --font-size-display-lg: 3.5rem;
+  --font-size-display-md: 2.5rem;
+
+  --font-size-heading-xl: 2rem;
+  --font-size-heading-lg: 1.5rem;
+  --font-size-heading-md: 1.25rem;
+
+  --font-size-body-lg: 1.125rem;
+  --font-size-body-md: 1rem;
+  --font-size-body-sm: 0.875rem;
+  --font-size-caption: 0.75rem;
+
+  /* Line heights */
+  --leading-display: 1.05;
+  --leading-heading: 1.15;
+  --leading-body: 1.6;
+
+  /* Legacy aliases consumed by plain CSS (body, .btn-*) */
+  --line-height-display: 1.05;
+  --line-height-heading: 1.15;
+  --line-height-body: 1.6;
+
+  /* Letter spacing */
+  --tracking-display: -0.02em;
+  --tracking-heading: -0.01em;
+  --tracking-body: 0em;
+
+  /* Legacy aliases consumed by plain CSS (.btn-*, @utility) */
+  --letter-spacing-display: -0.02em;
+  --letter-spacing-heading: -0.01em;
+  --letter-spacing-body: 0;
+  --letter-spacing-wide: 0.05em;
+
+  /* ============================================================
+     SPACING
+     ============================================================ */
+
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /* ============================================================
+     BORDER RADIUS — Premium hierarchy
+     ============================================================ */
+
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ============================================================
+     SHADOWS — Ultra-subtle premium depth
+     ============================================================ */
+
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px rgba(39, 47, 81, 0.03);
+  --shadow-sm: 0 1px 3px rgba(39, 47, 81, 0.04), 0 1px 2px rgba(39, 47, 81, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(39, 47, 81, 0.05), 0 2px 4px -2px rgba(39, 47, 81, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(39, 47, 81, 0.06), 0 4px 6px -4px rgba(39, 47, 81, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(39, 47, 81, 0.07), 0 8px 10px -6px rgba(39, 47, 81, 0.03);
+  --shadow-2xl: 0 25px 50px -12px rgba(39, 47, 81, 0.12);
+
+  /* ============================================================
+     MOTION
+     ============================================================ */
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.0, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0.0, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============================================================
+     Z-INDEX
+     ============================================================ */
+
+  --z-base: 0;
+  --z-above: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  background-image: url("/assets/brand/backgrounds/forma1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body);
+  transition: background-color var(--duration-normal) var(--ease-standard),
+              color var(--duration-normal) var(--ease-standard);
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   Registered as @utility so responsive variants (md:text-body-sm,
+   md:text-caption, …) compile correctly in Tailwind v4.
+   ============================================================ */
+
+@utility text-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display-xl);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--letter-spacing-display);
+  font-weight: var(--font-weight-regular);
+}
+
+@utility text-display-lg {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display-lg);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--letter-spacing-display);
+  font-weight: var(--font-weight-regular);
+}
+
+@utility text-display-md {
+  font-family: var(--font-display);
+  font-size: var(--font-size-display-md);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--letter-spacing-display);
+  font-weight: var(--font-weight-regular);
+}
+
+@utility text-heading-xl {
+  font-family: var(--font-body);
+  font-size: var(--font-size-heading-xl);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  font-weight: var(--font-weight-semibold);
+}
+
+@utility text-heading-lg {
+  font-family: var(--font-body);
+  font-size: var(--font-size-heading-lg);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  font-weight: var(--font-weight-semibold);
+}
+
+@utility text-heading-md {
+  font-family: var(--font-body);
+  font-size: var(--font-size-heading-md);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  font-weight: var(--font-weight-medium);
+}
+
+@utility text-body-lg {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-regular);
+}
+
+@utility text-body-md {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-regular);
+}
+
+@utility text-body-sm {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-regular);
+}
+
+@utility text-body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-regular);
+}
+
+@utility text-caption {
+  font-family: var(--font-body);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   PREMIUM COMPONENTS
+   ============================================================ */
+
+.card-premium {
+  border-radius: var(--radius-2xl);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.card-premium:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.card-elevated {
+  border-radius: var(--radius-xl);
+  background-color: var(--color-surface-elevated);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  border-radius: var(--radius-full);
+  background-color: var(--color-brand-gold);
+  color: var(--color-brand-navy);
+  transition: all var(--duration-fast) var(--ease-standard);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-brand-gold-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  background-color: transparent;
+  transition: all var(--duration-fast) var(--ease-standard);
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-brand-gold);
+  color: var(--color-brand-gold);
+}
+
+/* ============================================================
+   PREMIUM ANIMATIONS
+   ============================================================ */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-dark {
+  background: rgba(23, 15, 51, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Premium card hover */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Gold shimmer border */
+.gold-shimmer {
+  position: relative;
+}
+
+.gold-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(206, 184, 138, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gold-shimmer:hover::after {
+  opacity: 1;
+}
+
+/* Stagger delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* ============================================================
+   MOTION — REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE MEDIA
+   ============================================================ */
+
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 768px) {
+  .font-display,
+  .text-display-xl,
+  .text-display-lg,
+  .text-display-md {
+    word-break: break-word;
+  }
+
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+  }
+}
