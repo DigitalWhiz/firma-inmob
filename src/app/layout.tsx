@@ -10,11 +10,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "FIRMA Calamuchita — Propiedades en Calamuchita",
-    template: "%s — FIRMA Calamuchita",
+    default: "FIRMA Calamuchita | Inmobiliaria Premium",
+    template: "%s | FIRMA Calamuchita",
   },
   description:
-    "FIRMA Negocios Inmobiliarios — Suc. Calamuchita. Propiedades en venta en Villa Rumipal, Embalse y el Valle de Calamuchita, Córdoba, Argentina.",
+    "Inmobiliaria premium en el Valle de Calamuchita. Propiedades en venta en Villa Rumipal, Embalse, Santa Rosa de Calamuchita, La Cumbrecita y alrededores, Córdoba, Argentina.",
   metadataBase: new URL("https://firmacalamuchita.com"),
   openGraph: {
     type: "website",
