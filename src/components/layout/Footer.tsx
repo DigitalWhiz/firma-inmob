@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/config/company";
 
 const NAV_LINKS = [
   { href: "/propiedades", label: "Propiedades" },
@@ -48,11 +49,11 @@ export default function Footer() {
               </div>
             </Link>
             <p className="mt-4 max-w-xs text-body-sm text-white/50 leading-relaxed">
-              Negocios Inmobiliarios. Tu aliado de confianza en el Valle de
-              Calamuchita.
+              Inmobiliaria local especializada en el Valle de Calamuchita.
+              Cercanía y transparencia en cada paso.
             </p>
             <a
-              href="tel:+5493546123456"
+              href={PHONE_HREF}
               className="mt-4 inline-flex items-center gap-2 text-body-sm text-white/70 transition-colors duration-200 hover:text-[var(--color-brand-gold)]"
             >
               <svg
@@ -65,7 +66,7 @@ export default function Footer() {
               >
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
               </svg>
-              +54 9 3546 123456
+              {PHONE_DISPLAY}
             </a>
           </div>
 
@@ -140,11 +141,6 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} FIRMA. Todos los derechos
               reservados.
             </p>
-            <div className="flex gap-4">
-              <span className="text-caption text-white/40">
-                Mat. N° 1234 · CUCICBA
-              </span>
-            </div>
           </div>
         </div>
       </div>

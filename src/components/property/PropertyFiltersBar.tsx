@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
+// import type { ReactElement } from "react"; // ÍCONOS — ver bloque comentado abajo
 import type { PropertyType } from "@/types/property";
 import type { EditorialStatus } from "@/types/editorial";
 import type { EditorialProperty } from "@/lib/editorial/merge";
@@ -26,13 +27,83 @@ const SORT_LABELS: Record<SortOption, string> = {
   editorial: "Orden editorial",
 };
 
-const CATEGORY_ICONS: Record<string, string> = {
-  casas: "🏠",
-  terrenos: "📐",
-  departamentos: "🏢",
-  complejos: "🏔️",
-  campos: "🌾",
+/* ÍCONOS PREMIUM DE CATEGORÍAS — comentados por ahora.
+   Para reactivar: descomentar este bloque, la importación de ReactElement
+   arriba y los usos de <CategoryIcon /> en los botones. */
+
+/*
+const CATEGORY_ICONS: Record<string, ReactElement> = {
+  todas: (
+    <>
+      <rect pathLength={1} x="3.75" y="3.75" width="7" height="7" rx="1.75" />
+      <rect pathLength={1} x="13.25" y="3.75" width="7" height="7" rx="1.75" />
+      <rect pathLength={1} x="3.75" y="13.25" width="7" height="7" rx="1.75" />
+      <rect pathLength={1} x="13.25" y="13.25" width="7" height="7" rx="1.75" />
+    </>
+  ),
+  casas: (
+    <>
+      <path pathLength={1} d="M3.5 11 12 3.5l8.5 7.5" />
+      <path pathLength={1} d="M5.5 9.7V19.5a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9.7" />
+      <path pathLength={1} d="M9.75 20.5v-5.25h4.5v5.25" />
+    </>
+  ),
+  departamentos: (
+    <>
+      <path pathLength={1} d="M4 21V5.5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1V21" />
+      <path pathLength={1} d="M13 21V10.5h6a1 1 0 0 1 1 1V21" />
+      <path pathLength={1} d="M2.5 21h19" />
+      <path pathLength={1} d="M7 8h1.5M7 11.5h1.5M7 15h1.5" />
+      <path pathLength={1} d="M15.5 14h1.5M15.5 17h1.5" />
+    </>
+  ),
+  terrenos: (
+    <>
+      <rect pathLength={1} x="3.5" y="3.5" width="17" height="17" rx="2.5" />
+      <path pathLength={1} d="M7.5 16.5 10.5 8l6 1.5-1 7Z" />
+    </>
+  ),
+  complejos: (
+    <>
+      <circle pathLength={1} cx="17" cy="6.5" r="2.75" />
+      <path pathLength={1} d="M2.5 19.5 8.5 9.5l3.2 5.3 2.3-3.3 5.5 8Z" />
+    </>
+  ),
+  campos: (
+    <>
+      <path pathLength={1} d="M12 21V5.5" />
+      <path pathLength={1} d="M12 13.5c2.6 0 4.2-1.9 4.2-4.8-2.8 0-4.2 2-4.2 4.8Z" />
+      <path pathLength={1} d="M12 13.5c-2.6 0-4.2-1.9-4.2-4.8 2.8 0 4.2 2 4.2 4.8Z" />
+      <path pathLength={1} d="M12 9.5c2.4 0 3.9-1.8 3.9-4.5-2.6 0-3.9 1.9-3.9 4.5Z" />
+      <path pathLength={1} d="M12 9.5c-2.4 0-3.9-1.8-3.9-4.5 2.6 0 3.9 1.9 3.9 4.5Z" />
+      <path pathLength={1} d="M12 6c-1.4-1.4-1.4-3.2 0-4.6 1.4 1.4 1.4 3.2 0 4.6Z" />
+    </>
+  ),
 };
+
+function CategoryIcon({ slug, active }: { slug: string; active: boolean }) {
+  return (
+    <span
+      className={`firma-cat-icon${active ? " is-active" : ""}`}
+      style={{
+        color: active ? "var(--color-brand-gold)" : "var(--color-text-primary)",
+      }}
+      aria-hidden="true"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {CATEGORY_ICONS[slug] ?? CATEGORY_ICONS.todas}
+      </svg>
+    </span>
+  );
+}
+*/
 
 export default function PropertyFiltersBar({
   properties,
@@ -144,18 +215,18 @@ export default function PropertyFiltersBar({
     <div>
       {/* Category Visual Selector */}
       <div className="mb-6 md:mb-8">
-        <div className="flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-5 md:overflow-visible" style={{ scrollbarWidth: 'none' }}>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6 md:gap-3">
           {/* All categories */}
           <button
             onClick={() => setSelectedType(null)}
-            className="flex flex-col items-center gap-2 rounded-2xl border-2 p-1 transition-all duration-200 min-w-[120px] md:min-w-0"
+            className="firma-cat-btn flex flex-col items-center justify-center gap-1.5 rounded-2xl border-2 px-1 py-2.5 transition-all duration-200 md:gap-2 md:py-3"
             style={{
               borderColor: selectedType === null ? "var(--color-brand-gold)" : "var(--color-border)",
               backgroundColor: selectedType === null ? "rgba(206,184,138,0.08)" : "var(--color-surface)",
             }}
           >
-            <span className="text-2xl">🏘️</span>
-            <span className="text-caption font-medium" style={{ color: selectedType === null ? "var(--color-brand-gold)" : "var(--color-text-primary)" }}>
+            {/* <CategoryIcon slug="todas" active={selectedType === null} /> */}
+            <span className="text-caption font-medium leading-tight text-center lg:text-body-sm" style={{ color: selectedType === null ? "var(--color-text-primary)" : "var(--color-text-primary)" }}>
               TODAS
             </span>
             <span className="text-caption" style={{ color: "var(--color-text-muted)" }}>
@@ -167,14 +238,14 @@ export default function PropertyFiltersBar({
             <button
               key={cat.slug}
               onClick={() => setSelectedType(cat.tokkoTypes[0])}
-              className="flex flex-col items-center gap-2 rounded-2xl border-2 p-1 transition-all duration-200 min-w-[120px] md:min-w-0"
+              className="firma-cat-btn flex flex-col items-center justify-center gap-1.5 rounded-2xl border-2 px-1 py-2.5 transition-all duration-200 md:gap-2 md:py-3"
               style={{
                 borderColor: selectedType === cat.tokkoTypes[0] ? "var(--color-brand-gold)" : "var(--color-border)",
                 backgroundColor: selectedType === cat.tokkoTypes[0] ? "rgba(206,184,138,0.08)" : "var(--color-surface)",
               }}
             >
-              <span className="text-2xl">{CATEGORY_ICONS[cat.slug] || "🏘️"}</span>
-              <span className="text-caption font-medium" style={{ color: selectedType === cat.tokkoTypes[0] ? "var(--color-brand-gold)" : "var(--color-text-primary)" }}>
+              {/* <CategoryIcon slug={cat.slug} active={selectedType === cat.tokkoTypes[0]} /> */}
+              <span className="text-caption font-medium leading-tight text-center lg:text-body-sm" style={{ color: selectedType === cat.tokkoTypes[0] ? "var(--color-brand-gold)" : "var(--color-text-primary)" }}>
                 {cat.pluralLabel.toUpperCase()}
               </span>
               <span className="text-caption" style={{ color: "var(--color-text-muted)" }}>
@@ -187,25 +258,29 @@ export default function PropertyFiltersBar({
 
       {/* Search + Filter Toggle */}
       <div className="flex gap-3 mb-4">
-        <div className="flex-1 relative">
+        <div className="flex-1 relative group">
+          {/* ÍCONO LUPA — comentado
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-focus-within:scale-110 group-focus-within:-rotate-6 group-focus-within:text-[var(--color-brand-gold)]"
             width="18"
             height="18"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="var(--color-text-muted)"
-            strokeWidth="2"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            aria-hidden="true"
           >
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
           </svg>
+          */}
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar por título, ubicación..."
-            className="w-full rounded-xl border py-3 pl-10 pr-4 text-body-sm outline-none transition-colors duration-200 focus:border-[var(--color-brand-gold)]"
+            className="w-full rounded-xl border py-3 pl-4 pr-4 text-body-sm outline-none transition-colors duration-200 focus:border-[var(--color-brand-gold)]"
             style={{
               borderColor: "var(--color-border)",
               backgroundColor: "var(--color-surface)",
@@ -215,18 +290,33 @@ export default function PropertyFiltersBar({
         </div>
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center gap-2 rounded-xl border px-4 py-3 text-body-sm transition-colors duration-200 hover:border-[var(--color-brand-gold)]"
+          className={`firma-filters-btn${showFilters ? " is-open" : ""} flex items-center gap-2 rounded-xl border px-4 py-3 text-body-sm transition-colors duration-200 hover:border-[var(--color-brand-gold)]`}
           style={{
             borderColor: showFilters ? "var(--color-brand-gold)" : "var(--color-border)",
             color: showFilters ? "var(--color-brand-gold)" : "var(--color-text-muted)",
             backgroundColor: showFilters ? "rgba(206,184,138,0.08)" : "var(--color-surface)",
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="4" y1="12" x2="16" y2="12" />
-            <line x1="4" y1="18" x2="12" y2="18" />
+          {/* ÍCONO SLIDERS — comentado
+          <svg
+            className="firma-sliders"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <line x1="3.5" y1="7" x2="20.5" y2="7" />
+            <line x1="3.5" y1="12" x2="20.5" y2="12" />
+            <line x1="3.5" y1="17" x2="20.5" y2="17" />
+            <circle className="knob knob-k1" cx="9" cy="7" r="2.4" fill="currentColor" stroke="none" />
+            <circle className="knob knob-k2" cx="15" cy="12" r="2.4" fill="currentColor" stroke="none" />
+            <circle className="knob knob-k3" cx="8" cy="17" r="2.4" fill="currentColor" stroke="none" />
           </svg>
+          */}
           FILTROS
         </button>
       </div>
@@ -323,7 +413,7 @@ export default function PropertyFiltersBar({
           {activeFilters.map((chip) => (
             <span
               key={chip.key}
-              className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-caption"
+              className="group/chip inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-caption"
               style={{
                 borderColor: "var(--color-brand-gold)",
                 color: "var(--color-brand-gold)",
@@ -331,15 +421,17 @@ export default function PropertyFiltersBar({
               }}
             >
               {chip.label}
+              {/* ÍCONO X PARA QUITAR CHIP — comentado
               <button
                 onClick={chip.onRemove}
-                className="ml-0.5 rounded-full p-0.5 transition-colors duration-200 hover:bg-[rgba(206,184,138,0.2)]"
+                className="ml-0.5 rounded-full p-0.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[rgba(206,184,138,0.2)] group-hover/chip:rotate-90"
                 aria-label={`Quitar filtro ${chip.label}`}
               >
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               </button>
+              */}
             </span>
           ))}
           <button
@@ -381,8 +473,9 @@ export default function PropertyFiltersBar({
       {/* Property Grid */}
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
+          {/* ÍCONO DE ESTADO VACÍO — comentado
           <div
-            className="flex h-20 w-20 items-center justify-center rounded-full"
+            className="flex h-20 w-20 items-center justify-center rounded-full animate-float"
             style={{ backgroundColor: "var(--color-surface)" }}
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" strokeWidth="1.5">
@@ -390,7 +483,8 @@ export default function PropertyFiltersBar({
               <path d="m21 21-4.35-4.35" />
             </svg>
           </div>
-          <h3 className="mt-6 font-display text-xl" style={{ color: "var(--color-text-primary)" }}>
+          */}
+          <h3 className="mt-2 font-display text-xl" style={{ color: "var(--color-text-primary)" }}>
             No encontramos propiedades
           </h3>
           <p className="mt-2 max-w-md text-body-sm" style={{ color: "var(--color-text-muted)" }}>

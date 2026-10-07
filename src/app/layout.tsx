@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import Layout from "@/components/layout/Layout";
 import "./globals.css";
 
@@ -10,11 +11,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "FIRMA Calamuchita | Inmobiliaria Premium",
+    default: "FIRMA Calamuchita | Inmobiliaria en el Valle de Calamuchita",
     template: "%s | FIRMA Calamuchita",
   },
   description:
-    "Inmobiliaria premium en el Valle de Calamuchita. Propiedades en venta en Villa Rumipal, Embalse, Santa Rosa de Calamuchita, La Cumbrecita y alrededores, Córdoba, Argentina.",
+    "Firma Inmobiliaria Calamuchita, inmobiliaria local especializada en el Valle de Calamuchita, Córdoba. Casas, departamentos, lotes, cabañas, complejos y campos en venta.",
   metadataBase: new URL("https://firmacalamuchita.com"),
   openGraph: {
     type: "website",
@@ -22,14 +23,14 @@ export const metadata: Metadata = {
     siteName: "FIRMA Calamuchita",
     title: "FIRMA Calamuchita — Propiedades en Calamuchita",
     description:
-      "Propiedades en venta en Villa Rumipal, Embalse y el Valle de Calamuchita, Córdoba, Argentina.",
+      "Propiedades en venta en Santa Rosa de Calamuchita, Villa Rumipal, Villa del Dique, Embalse y el Valle de Calamuchita, Córdoba, Argentina.",
     url: "https://firmacalamuchita.com",
   },
   twitter: {
     card: "summary_large_image",
     title: "FIRMA Calamuchita — Propiedades en Calamuchita",
     description:
-      "Propiedades en venta en Villa Rumipal, Embalse y el Valle de Calamuchita, Córdoba, Argentina.",
+      "Propiedades en venta en Santa Rosa de Calamuchita, Villa Rumipal, Villa del Dique, Embalse y el Valle de Calamuchita, Córdoba, Argentina.",
     images: ["/assets/brand/logo/firma-logo.png"],
   },
   robots: {
@@ -50,6 +51,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="es" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full">
         <Layout>{children}</Layout>
+        <GoogleAnalytics
+          gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-XCP7Y9HD2M"}
+        />
+        <GoogleTagManager gtmId="GT-5DHD52NH" />
       </body>
     </html>
   );

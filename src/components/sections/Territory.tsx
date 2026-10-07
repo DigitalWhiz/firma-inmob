@@ -49,8 +49,9 @@ export default function Territory() {
                   fontSize: "var(--font-size-body-md)",
                 }}
               >
-                Villa Rumipal, Embalse, Mina Clavero — destinos que combinan
-                montañas, lagos y una calidad de vida única en la Argentina.
+                Villa Rumipal, Villa del Dique, Santa Rosa de Calamuchita —
+                destinos que combinan montañas, lagos y una calidad de vida
+                única en la Argentina.
               </p>
               <Link
                 href="/calamuchita"
@@ -75,7 +76,7 @@ export default function Territory() {
             {[
               { name: "Villa Rumipal", desc: "Lago y naturaleza" },
               { name: "Embalse", desc: "Aguas claras" },
-              { name: "Mina Clavero", desc: "Montaña y arte" },
+              { name: "Villa del Dique", desc: "Embalse y sierras" },
             ].map((place, i) => (
               <ScrollReveal key={place.name} delay={200 + i * 100}>
                 <div

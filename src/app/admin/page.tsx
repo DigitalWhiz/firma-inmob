@@ -8,6 +8,7 @@ import AdminSyncButton from "./AdminSyncButton";
 import AdminLogoutButton from "./AdminLogoutButton";
 import AdminPropertyList from "./AdminPropertyList";
 import AdminHomeContent from "./AdminHomeContent";
+import AdminNav from "./AdminNav";
 
 export const dynamic = "force-dynamic";
 
@@ -114,7 +115,7 @@ export default async function AdminPage() {
   return (
     <div className="min-h-screen bg-[var(--color-background)] px-4 py-12 md:px-6">
       <div className="mx-auto max-w-6xl">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-caption tracking-widest text-[var(--color-brand-gold)]">
               ADMIN
@@ -126,7 +127,10 @@ export default async function AdminPage() {
               Panel de Administración
             </h1>
           </div>
-          <AdminLogoutButton />
+          <div className="flex flex-col items-start gap-4 md:items-end">
+            <AdminNav />
+            <AdminLogoutButton />
+          </div>
         </div>
 
         {/* Status Cards */}

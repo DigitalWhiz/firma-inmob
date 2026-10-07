@@ -20,7 +20,7 @@ export const CATEGORIES: FirmaCategory[] = [
     tokkoTypes: ["house"],
     metaTitle: "Casas en Calamuchita",
     metaDescription:
-      "Casas en venta en Villa Rumipal, Embalse, Villa General Belgrano y el Valle de Calamuchita, Córdoba.",
+      "Casas en venta en Santa Rosa de Calamuchita, Villa Rumipal, Villa del Dique, Embalse y el Valle de Calamuchita, Córdoba.",
   },
   {
     slug: "departamentos",
@@ -42,7 +42,7 @@ export const CATEGORIES: FirmaCategory[] = [
     tokkoTypes: ["land"],
     metaTitle: "Terrenos en Calamuchita",
     metaDescription:
-      "Terrenos y lotes en venta en Villa Rumipal, Embalse y el Valle de Calamuchita, Córdoba.",
+      "Lotes y terrenos en venta en Santa Rosa de Calamuchita, Villa Rumipal, Villa del Dique, Embalse y el Valle de Calamuchita, Córdoba.",
   },
   {
     slug: "complejos",

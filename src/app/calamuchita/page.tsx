@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import About from "@/components/sections/About";
 
 export const metadata: Metadata = {
   title: "Valle de Calamuchita",
   description:
-    "Conocé el Valle de Calamuchita: Villa Rumipal, Embalse, Villa General Belgrano, Mina Clavero y más destinos en Córdoba, Argentina.",
+    "Conocé el Valle de Calamuchita: Santa Rosa de Calamuchita, Villa Rumipal, Villa del Dique, Embalse, Villa General Belgrano y más destinos en Córdoba, Argentina.",
   openGraph: {
     title: "Valle de Calamuchita — FIRMA",
     description:
@@ -16,22 +17,17 @@ const LOCATIONS = [
   {
     name: "Villa Rumipal",
     description:
-      "A orillas del embalse San Roque, Villa Rumipal ofrece playa propia, pesca y tranquilidad a solo minutos de las ciudades principales.",
+      "Villa Rumipal ofrece playa, lago, tranquilidad y pesca, naturaleza a solo minutos de las ciudades.",
   },
   {
     name: "Embalse",
     description:
-      "Ciudad turística con acceso al embalse San Roque, pileta de natación olímpica y una vibrante actividad commercial.",
+      "Ciudad turística con acceso rápidos, lago, naturaleza y una vibrante actividad comercial.",
   },
   {
     name: "Villa General Belgrano",
     description:
       "Famosa por su arquitectura germánica y el Oktoberfest, Villa General Belgrano es un destino único todo el año.",
-  },
-  {
-    name: "Mina Clavero",
-    description:
-      "Puerta de entrada a las Sierras Puntanas, con ríos cristalinos, trekking y gastronomía regional.",
   },
   {
     name: "El Durazno",
@@ -58,11 +54,13 @@ export default function CalamuchitaPage() {
             VALLE DE CALAMUCHITA
           </h1>
           <p className="mt-4 max-w-xl text-body-lg text-white/70">
-            Un territorio único en el corazón de Córdoba, Argentina. Sierras,
-            embalses y pueblos con encanto propio.
+            Un territorio único en el corazón de Córdoba, Argentina.
+            Naturaleza y tranquilidad a minutos de las principales ciudades.
           </p>
         </div>
       </section>
+
+      <About />
 
       <section className="px-4 py-8 md:px-6 md:py-12 lg:py-16">
         <div className="mx-auto max-w-[1440px]">

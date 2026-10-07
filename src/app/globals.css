@@ -434,6 +434,102 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
+/* ============================================================
+   PREMIUM FILTER ICONS — DESACTIVADO POR AHORA.
+   Los íconos de PropertyFiltersBar.tsx están solo comentados.
+   Para reactivar: descomentar los íconos en ese archivo y
+   quitar el cierre de comentario de la última línea de este bloque.
+   =============================================================
+
+@keyframes iconDraw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes iconShine {
+  from { transform: translateX(-130%); }
+  to { transform: translateX(130%); }
+}
+
+.firma-cat-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  color: var(--color-text-primary);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s ease,
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.35s ease;
+}
+
+.firma-cat-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.firma-cat-btn:hover .firma-cat-icon {
+  transform: translateY(-3px) scale(1.07);
+  background-color: rgba(206, 184, 138, 0.1);
+  box-shadow: 0 12px 24px -16px rgba(23, 15, 51, 0.45);
+}
+
+.firma-cat-icon.is-active {
+  background-color: rgba(206, 184, 138, 0.16);
+  box-shadow: 0 14px 26px -16px rgba(206, 184, 138, 0.85);
+}
+
+.firma-cat-icon.is-active svg :is(path, rect, circle, line, polyline, polygon) {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: iconDraw 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.firma-cat-icon.is-active svg :is(path, rect, circle, line):nth-child(1) { animation-delay: 0s; }
+.firma-cat-icon.is-active svg :is(path, rect, circle, line):nth-child(2) { animation-delay: 0.07s; }
+.firma-cat-icon.is-active svg :is(path, rect, circle, line):nth-child(3) { animation-delay: 0.14s; }
+.firma-cat-icon.is-active svg :is(path, rect, circle, line):nth-child(4) { animation-delay: 0.21s; }
+.firma-cat-icon.is-active svg :is(path, rect, circle, line):nth-child(5) { animation-delay: 0.28s; }
+.firma-cat-icon.is-active svg :is(path, rect, circle, line):nth-child(6) { animation-delay: 0.35s; }
+
+.firma-cat-icon.is-active::after {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  background: linear-gradient(
+    110deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 62%
+  );
+  transform: translateX(-130%);
+  animation: iconShine 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  pointer-events: none;
+}
+
+Filters button — slider knobs glide on hover / when open
+.firma-sliders .knob {
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.firma-filters-btn .knob-k1 { transition-delay: 0s; }
+.firma-filters-btn .knob-k2 { transition-delay: 0.07s; }
+.firma-filters-btn .knob-k3 { transition-delay: 0.14s; }
+
+.firma-filters-btn:hover .knob-k1,
+.firma-filters-btn.is-open .knob-k1 { transform: translateX(5px); }
+.firma-filters-btn:hover .knob-k2,
+.firma-filters-btn.is-open .knob-k2 { transform: translateX(-5px); }
+.firma-filters-btn:hover .knob-k3,
+.firma-filters-btn.is-open .knob-k3 { transform: translateX(4px); }
+============================================================= */
+
+
 /* Glass morphism */
 .glass {
   background: rgba(255, 255, 255, 0.1);

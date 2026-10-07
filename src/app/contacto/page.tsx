@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ADVISORS } from "@/data/advisors";
 import AdvisorCard from "@/components/advisors/AdvisorCard";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/config/company";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -43,7 +44,7 @@ export default function ContactoPage() {
           <div className="mb-6 md:mb-10">
             <p
               className="text-caption"
-              style={{ color: "var(--color-brand-gold)" }}
+              style={{ color: "var(--color-text-primary)" }}
             >
               NUESTROS ASESORES
             </p>
@@ -80,11 +81,11 @@ export default function ContactoPage() {
                 info@firmacalamuchita.com
               </a>
               <a
-                href="tel:+5493546123456"
+                href={PHONE_HREF}
                 className="transition-colors duration-200 hover:text-[var(--color-brand-gold)]"
                 style={{ color: "var(--color-text-muted)" }}
               >
-                +54 9 3546 123456
+                {PHONE_DISPLAY}
               </a>
               <p style={{ color: "var(--color-text-muted)" }}>
                 Villa Rumipal, Córdoba, Argentina

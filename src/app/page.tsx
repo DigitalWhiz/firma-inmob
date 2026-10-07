@@ -2,6 +2,7 @@ import Hero from "@/components/sections/Hero";
 import CategoryCards from "@/components/sections/CategoryCards";
 import FeaturedProperties from "@/components/sections/FeaturedProperties";
 import Territory from "@/components/sections/Territory";
+import About from "@/components/sections/About";
 import Services from "@/components/sections/Services";
 import SellCTA from "@/components/sections/SellCTA";
 import FinalCTA from "@/components/sections/FinalCTA";
@@ -57,6 +58,7 @@ export default async function HomePage() {
       <SucursalesPreview />
       <FeaturedProperties properties={featured} />
       <Territory />
+      <About />
       <Services />
       <SellCTA />
       <FinalCTA />
