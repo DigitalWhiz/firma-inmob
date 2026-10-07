@@ -3,12 +3,9 @@ interface JsonLdProps {
 }
 
 export default function JsonLd({ data }: JsonLdProps) {
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  // \u003c evita romper el bloque <script> si algún string contiene "</script>"
+  const json = JSON.stringify(data).replace(/</g, "\\u003c");
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }
 
 export function buildPropertyJsonLd(property: {

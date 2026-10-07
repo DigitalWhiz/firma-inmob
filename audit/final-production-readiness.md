@@ -271,8 +271,8 @@ TOKKO_API_KEY=<your key>
 TOKKO_COMPANY_ID=47477
 TOKKO_BRANCH_ID=85101
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-REVALIDATE_SECRET=[REDACTED]
-ADMIN_USERNAME=info@firmacalamuchita.com
+REVALIDATE_SECRET=<generar con: openssl rand -base64 32>
+ADMIN_USERNAME=<nombre de usuario>
 ADMIN_PASSWORD=<your password>
 ```
 

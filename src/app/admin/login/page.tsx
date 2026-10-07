@@ -8,7 +8,9 @@ type LoginStatus = "idle" | "loading" | "error";
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const from = searchParams.get("from") || "/admin";
+  const rawFrom = searchParams.get("from") || "/admin";
+  // Solo rutas internas (evita open redirect a //evil.com o https://externo)
+  const from = rawFrom.startsWith("/") && !rawFrom.startsWith("//") ? rawFrom : "/admin";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

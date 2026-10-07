@@ -22,6 +22,14 @@ const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
 
 export function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
   const now = Date.now();
+
+  // Poda oportunista de entradas expiradas (evita crecimiento de memoria)
+  if (rateLimitStore.size > 500) {
+    for (const [key, entry] of rateLimitStore) {
+      if (now > entry.resetAt) rateLimitStore.delete(key);
+    }
+  }
+
   const entry = rateLimitStore.get(ip);
 
   if (!entry || now > entry.resetAt) {
@@ -266,8 +274,16 @@ export async function isAuthenticated(): Promise<boolean> {
 // ============================================================
 
 export function getClientIp(request: Request): string {
+  // x-real-ip lo setea el proxy de Hostinger y no es manipulable por el cliente.
+  const realIp = request.headers.get("x-real-ip")?.trim();
+  if (realIp) return realIp;
+  // Fallback: último hop de XFF (los primeros son spoofables por el cliente).
   const forwarded = request.headers.get("x-forwarded-for");
-  return forwarded?.split(",")[0]?.trim() || "unknown";
+  if (forwarded) {
+    const hops = forwarded.split(",").map((h) => h.trim()).filter(Boolean);
+    if (hops.length > 0) return hops[hops.length - 1];
+  }
+  return "unknown";
 }
 
 // ============================================================

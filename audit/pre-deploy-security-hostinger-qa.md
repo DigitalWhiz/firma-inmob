@@ -278,7 +278,7 @@ Configurar en Hostinger hPanel → Environment Variables:
 | `NEXT_PUBLIC_SITE_URL` | `https://firmacalamuchita.com` | ✅ SÍ |
 | `NODE_ENV` | `production` | Automático |
 
-**IMPORTANTE**: Generar `REVALIDATE_SECRET` nuevo para producción. No usar el de desarrollo (`[REDACTED]`).
+**IMPORTANTE**: Generar `REVALIDATE_SECRET` nuevo para producción. No usar el de desarrollo (valor redactado — era predecible).
 
 ---
 
@@ -346,7 +346,7 @@ Plan Business Web Hosting tiene recursos compartidos.
 **Mitigación**: ISR reduce carga. Solo `/admin` y `/api/revalidate` son dinámicos.
 
 ### Riesgo 4: REVALIDATE_SECRET de desarrollo
-El secret actual (`[REDACTED]`) es predecible.
+El secret de desarrollo (valor redactado) es predecible.
 **Fix**: Generar secret aleatorio para producción.
 
 ---

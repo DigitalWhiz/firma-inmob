@@ -154,19 +154,51 @@ describe("Security — Secrets Comprehensive Scan", () => {
     }
   });
 
-  it("no hardcoded API key in scripts", async () => {
+  it("no secret values from local env files leak into the repository", async () => {
     const fs = await import("fs");
     const path = await import("path");
 
-    const scriptsDir = path.join(process.cwd(), "scripts");
-    if (!fs.existsSync(scriptsDir)) return;
+    const SECRET_KEYS = ["TOKKO_API_KEY", "REVALIDATE_SECRET", "ADMIN_PASSWORD", "ADMIN_JWT_SECRET"];
+    const secrets: string[] = [];
 
-    const entries = fs.readdirSync(scriptsDir);
-    for (const entry of entries) {
-      const filePath = path.join(scriptsDir, entry);
-      const content = fs.readFileSync(filePath, "utf-8");
-      expect(content).not.toMatch(/[REDACTED]/);
+    for (const envFile of [".env", ".env.local", ".env.production"]) {
+      const envPath = path.join(process.cwd(), envFile);
+      if (!fs.existsSync(envPath)) continue;
+      for (const line of fs.readFileSync(envPath, "utf-8").split(/\r?\n/)) {
+        const eq = line.indexOf("=");
+        if (eq === -1) continue;
+        const key = line.slice(0, eq).trim();
+        const value = line.slice(eq + 1).trim();
+        if (SECRET_KEYS.includes(key) && value.length >= 16) secrets.push(value);
+      }
     }
+    if (secrets.length === 0) return;
+
+    const SKIP_DIRS = new Set(["node_modules", ".next", ".git", "renders", "raw", "coverage"]);
+    const SCAN_EXT = new Set([".ts", ".tsx", ".js", ".mjs", ".json", ".md", ".txt", ".yml", ".yaml"]);
+    const leaks: string[] = [];
+
+    const walk = (dir: string) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          if (!SKIP_DIRS.has(entry.name)) walk(fullPath);
+          continue;
+        }
+        if (entry.name.startsWith(".env") && entry.name !== ".env.example") continue;
+        if (!SCAN_EXT.has(path.extname(entry.name))) continue;
+        const content = fs.readFileSync(fullPath, "utf-8");
+        for (const secret of secrets) {
+          if (content.includes(secret)) {
+            leaks.push(path.relative(process.cwd(), fullPath));
+            break;
+          }
+        }
+      }
+    };
+    walk(process.cwd());
+
+    expect(leaks, "secret values from .env files found in tracked files").toEqual([]);
   });
 
   it("env.example has correct variable names", async () => {

@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   images: {
     remotePatterns: [
       {
@@ -44,7 +45,7 @@ const nextConfig: NextConfig = {
         },
         {
           key: "X-XSS-Protection",
-          value: "1; mode=block",
+          value: "0",
         },
         {
           key: "Referrer-Policy",
@@ -70,7 +71,7 @@ const nextConfig: NextConfig = {
       ],
     },
     {
-      source: "/admin/(.*)",
+      source: "/admin/:path*",
       headers: [
         {
           key: "Cache-Control",
