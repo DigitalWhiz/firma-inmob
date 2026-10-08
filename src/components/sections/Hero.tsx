@@ -70,14 +70,14 @@ export default function Hero({ property, availableLocations }: HeroProps) {
         </div>
 
         <h1
-          className="mt-6 max-w-3xl font-display leading-[1.05] animate-fade-in-up delay-100"
+          className="mt-28 max-w-3xl font-display leading-[1.05] animate-fade-in-up delay-100 md:mt-6"
           style={{
             color: "var(--color-white)",
             fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
             letterSpacing: "-0.02em",
           }}
         >
-          Tu próximo hogar
+          Tu próxima propiedad
           <br />
           te está esperando
         </h1>
