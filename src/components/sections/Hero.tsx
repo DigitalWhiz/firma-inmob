@@ -56,7 +56,7 @@ export default function Hero({ property, availableLocations }: HeroProps) {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end px-4 pb-12 pt-28 md:px-6 md:pb-40 md:pt-0">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center px-4 pb-12 pt-8 md:px-6 md:pb-24 md:pt-0">
         <div className="animate-fade-in-up">
           <p
             className="inline-flex items-center gap-2 text-caption tracking-widest"
@@ -70,7 +70,7 @@ export default function Hero({ property, availableLocations }: HeroProps) {
         </div>
 
         <h1
-          className="mt-28 max-w-3xl font-display leading-[1.05] animate-fade-in-up delay-100 md:mt-6"
+          className="mt-6 max-w-3xl font-display leading-[1.05] animate-fade-in-up delay-100"
           style={{
             color: "var(--color-white)",
             fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
