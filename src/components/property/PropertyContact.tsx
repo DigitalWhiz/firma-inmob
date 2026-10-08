@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import type { FormEvent } from "react";
 import { trackConversion } from "@/lib/analytics";
 import { ADVISORS } from "@/data/advisors";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
@@ -8,7 +10,42 @@ interface PropertyContactProps {
   propertyTitle: string;
 }
 
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 export default function PropertyContact({ propertyTitle }: PropertyContactProps) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<FormStatus>("idle");
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, message, property: propertyTitle }),
+      });
+      if (!res.ok) throw new Error();
+      trackConversion({ event: "form_submitted" });
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const inputStyle = {
+    borderColor: "var(--color-border)",
+    backgroundColor: "var(--color-background)",
+    color: "var(--color-text-primary)",
+  };
+
   return (
     <div
       className="w-full min-w-0 overflow-hidden rounded-2xl p-2 md:p-3 lg:p-3"
@@ -28,8 +65,8 @@ export default function PropertyContact({ propertyTitle }: PropertyContactProps)
       </p>
       <div className="mt-3 md:mt-6 grid grid-cols-1 gap-2 md:gap-3 sm:grid-cols-2 md:grid-cols-3">
         {ADVISORS.map((advisor) => {
-          const message = `Hola, quiero consultar por la propiedad "${propertyTitle}" de FIRMA Calamuchita.`;
-          const url = getWhatsAppUrl(advisor.phone, message);
+          const advisorMessage = `Hola, quiero consultar por la propiedad "${propertyTitle}" de FIRMA Calamuchita.`;
+          const url = getWhatsAppUrl(advisor.phone, advisorMessage);
 
           return (
             <a
@@ -71,6 +108,112 @@ export default function PropertyContact({ propertyTitle }: PropertyContactProps)
             </a>
           );
         })}
+      </div>
+
+      {/* Email form */}
+      <div className="mt-6 border-t pt-4 md:mt-8 md:pt-6" style={{ borderColor: "var(--color-border)" }}>
+        <h3
+          className="font-display text-base md:text-lg"
+          style={{ color: "var(--color-text-primary)" }}
+        >
+          O ENVIANOS UN EMAIL
+        </h3>
+        <p
+          className="mt-1 text-xs md:text-body-sm"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          Te respondemos a la brevedad.
+        </p>
+
+        <form onSubmit={handleSubmit} className="mt-3 space-y-2 md:mt-4 md:space-y-3">
+          <div>
+            <label htmlFor="contact-name" className="text-[10px] tracking-wider" style={{ color: "var(--color-text-muted)" }}>
+              NOMBRE *
+            </label>
+            <input
+              id="contact-name"
+              type="text"
+              required
+              minLength={2}
+              maxLength={100}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="mt-1 w-full rounded-xl border px-3 py-2.5 text-body-sm outline-none transition-colors duration-200 focus:border-[var(--color-brand-gold)]"
+              style={inputStyle}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="contact-email" className="text-[10px] tracking-wider" style={{ color: "var(--color-text-muted)" }}>
+              EMAIL *
+            </label>
+            <input
+              id="contact-email"
+              type="email"
+              required
+              maxLength={254}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 w-full rounded-xl border px-3 py-2.5 text-body-sm outline-none transition-colors duration-200 focus:border-[var(--color-brand-gold)]"
+              style={inputStyle}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="contact-phone" className="text-[10px] tracking-wider" style={{ color: "var(--color-text-muted)" }}>
+              TELÉFONO
+            </label>
+            <input
+              id="contact-phone"
+              type="tel"
+              maxLength={30}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="mt-1 w-full rounded-xl border px-3 py-2.5 text-body-sm outline-none transition-colors duration-200 focus:border-[var(--color-brand-gold)]"
+              style={inputStyle}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="contact-message" className="text-[10px] tracking-wider" style={{ color: "var(--color-text-muted)" }}>
+              MENSAJE *
+            </label>
+            <textarea
+              id="contact-message"
+              required
+              minLength={5}
+              maxLength={2000}
+              rows={3}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="mt-1 w-full resize-none rounded-xl border px-3 py-2.5 text-body-sm outline-none transition-colors duration-200 focus:border-[var(--color-brand-gold)]"
+              style={inputStyle}
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="w-full rounded-xl px-6 py-3 text-caption font-semibold tracking-wider transition-all duration-200 hover:shadow-lg disabled:opacity-50"
+            style={{
+              backgroundColor: "var(--color-brand-gold)",
+              color: "var(--color-brand-navy)",
+            }}
+          >
+            {status === "loading" ? "ENVIANDO..." : "ENVIAR CONSULTA"}
+          </button>
+
+          {status === "success" && (
+            <p className="text-body-sm" style={{ color: "#16A34A" }}>
+              ¡Gracias! Recibimos tu consulta y te respondemos a la brevedad.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-body-sm" style={{ color: "#EF4444" }}>
+              No se pudo enviar. Probá por WhatsApp o al teléfono de la inmobiliaria.
+            </p>
+          )}
+        </form>
       </div>
     </div>
   );

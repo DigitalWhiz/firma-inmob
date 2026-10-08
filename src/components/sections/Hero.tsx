@@ -34,7 +34,7 @@ export default function Hero({ property, availableLocations }: HeroProps) {
   };
 
   return (
-    <section className="relative h-[calc(100svh-4rem)] min-h-[700px] w-full overflow-hidden md:h-[calc(100svh-5rem)]">
+    <section className="relative flex min-h-[calc(100svh-4rem)] w-full flex-col overflow-hidden md:min-h-[calc(100svh-5rem)]">
       {image && (
         <Image
           src={image.originalUrl || image.imageUrl}
@@ -56,7 +56,7 @@ export default function Hero({ property, availableLocations }: HeroProps) {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-4 pb-32 md:px-6 md:pb-40">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end px-4 pb-12 pt-28 md:px-6 md:pb-40 md:pt-0">
         <div className="animate-fade-in-up">
           <p
             className="inline-flex items-center gap-2 text-caption tracking-widest"
