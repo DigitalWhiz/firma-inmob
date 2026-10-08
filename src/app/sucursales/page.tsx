@@ -30,7 +30,7 @@ export default function SucursalesPage() {
   return (
     <>
       <section
-        className="px-4 pt-32 pb-16 md:px-6 md:pt-40 md:pb-24"
+        className="px-4 pt-8 pb-16 md:px-6 md:pt-24 md:pb-24"
         style={{ backgroundColor: "var(--color-brand-navy)" }}
       >
         <div className="mx-auto max-w-[1440px]">

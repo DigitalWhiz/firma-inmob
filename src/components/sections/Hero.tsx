@@ -34,7 +34,7 @@ export default function Hero({ property, availableLocations }: HeroProps) {
   };
 
   return (
-    <section className="relative h-[100svh] min-h-[700px] w-full overflow-hidden">
+    <section className="relative h-[calc(100svh-4rem)] min-h-[700px] w-full overflow-hidden md:h-[calc(100svh-5rem)]">
       {image && (
         <Image
           src={image.originalUrl || image.imageUrl}
